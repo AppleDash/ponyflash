@@ -4,12 +4,13 @@ import {render} from 'react-dom';
 import FlashView from './flashview.jsx'
 import FlashButtons from './flashbuttons.jsx'
 
+import $ from 'jquery';
+
 class PonyFlashApp extends React.Component {
     constructor() {
         super();
         this.state = {
             currentFlash: 1,
-            maxFlash: 1000
         }
     }
 
@@ -24,11 +25,11 @@ class PonyFlashApp extends React.Component {
 
         if (newId < 1) {
             newId = 1;
-        } else if (newId > this.state.maxFlash) {
-            newId = this.state.maxFlash;
+        } else if (newId > this.props.maxFlash) {
+            newId = this.props.maxFlash;
         }
 
-        this.setState({currentFlash: newId, maxFlash: this.state.maxFlash});
+        this.setState({currentFlash: newId});
     }
 
     render() {
@@ -41,4 +42,9 @@ class PonyFlashApp extends React.Component {
     }
 }
 
-render(<PonyFlashApp />, document.getElementById('ponyflash-app'));
+$.get('http://localhost:3000/swf', function(data, status, jqxhr) {
+    var maxFlash = data.maxflash;
+
+    render(<PonyFlashApp maxFlash={maxFlash} />, document.getElementById('ponyflash-app'));
+});
+

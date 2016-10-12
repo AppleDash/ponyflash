@@ -31,7 +31,6 @@ app.get('/swf', function(request, response) {
                 return;
             }
         }
-
     });
 });
 

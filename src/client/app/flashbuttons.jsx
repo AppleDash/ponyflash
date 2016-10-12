@@ -1,17 +1,24 @@
 import React from 'react';
 
-export class FlashButtons extends React.Component {
+export default class FlashButtons extends React.Component {
     nextFlash() {
-        this.props.onFlashChanged(this.props.currentFlash + 1);
+        this.props.stepFlash(1);
     }
 
     prevFlash() {
-        this.props.onFlashChanged(this.props.currentFlash - 1);
+        this.props.stepFlash(-1);
     }
+
+    randomFlash() {
+        this.props.stepFlash(0);
+    }
+
     render() {
         return (
             <div id="flash-buttons">
-                <button className="btn btn-primary" onClick={this.nextFlash.bind(this)}>Next</button><button className="" onClick={this.prevFlash.bind(this)}>Previous</button>
+                <a href="javascript:void(0)" onClick={this.nextFlash.bind(this)}>Next</a> |
+                <a href="javascript:void(0)" onClick={this.randomFlash.bind(this)}>Random</a> |
+                <a href="javascript:void(0)" onClick={this.prevFlash.bind(this)}>Previous</a>
             </div>
         )
     }

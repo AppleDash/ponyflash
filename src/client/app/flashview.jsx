@@ -1,6 +1,6 @@
 import React from 'react';
 
-export class FlashView extends React.Component {
+export default class FlashView extends React.Component {
     render() {
         var flashUrl = 'https://dashie.in/f/swfproxy.php?swf=' + this.props.flashId;
         return (

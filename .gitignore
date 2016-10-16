@@ -3,4 +3,5 @@ node_modules/
 src/client/public/bundle.*
 src/server/data/*
 !src/server/data/.placeholder
+npm-debug.log
 

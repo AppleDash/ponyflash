@@ -6,9 +6,12 @@ var app = express();
 
 
 var DATA_DIR = './data/';
+var CLIENT_DIR = '../client/';
+
+app.use(express.static(path.join(CLIENT_DIR, 'public/')));
 
 app.get('/', function(request, response) {
-    response.send('Hello, world!');
+    response.sendFile('index.html', {root: CLIENT_DIR});
 });
 
 app.get('/swf', function(request, response) {

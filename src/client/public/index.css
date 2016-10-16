@@ -4,10 +4,11 @@ body {
 
 #ponyflash-app {
     text-align: center;
-    vertical-align: center;
 }
 
-#flash {
+#flash, #flash-container {
     width: 804px;
     height: 755px;
+    text-align: center;
+    margin: auto;
 }

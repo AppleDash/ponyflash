@@ -11,14 +11,24 @@ class PonyFlashApp extends React.Component {
         super();
         this.state = {
             currentFlash: 1,
-        }
+        };
+        this.stepFlash = this.stepFlash.bind(this);
+    }
+
+    componentDidMount() {
+        $.get(this.props.apiUrl + "/swf", (function(result) {
+            this.setState({
+                currentFlash: this.state.currentFlash,
+                maxFlash: result.maxflash
+            });
+        }).bind(this));
     }
 
     stepFlash(delta) {
         var newId;
 
         if (delta == 0) {
-            newId = 0; // TODO: 0 means random
+            newId = Math.floor(Math.random() * (this.state.maxFlash - 1) + 1);
         } else {
             newId = this.state.currentFlash + delta;
         }
@@ -36,15 +46,10 @@ class PonyFlashApp extends React.Component {
         return (
             <div>
                 <FlashView flashId={this.state.currentFlash} />
-                <FlashButtons currentFlash={this.state.currentFlash} stepFlash={this.stepFlash.bind(this)} />
+                <FlashButtons stepFlash={this.stepFlash.bind(this)} />
             </div>
         )
     }
 }
 
-$.get('http://localhost:3000/swf', function(data, status, jqxhr) {
-    var maxFlash = data.maxflash;
-
-    render(<PonyFlashApp maxFlash={maxFlash} />, document.getElementById('ponyflash-app'));
-});
-
+render(<PonyFlashApp apiUrl="http://localhost:3000" />, document.getElementById('ponyflash-app'));
